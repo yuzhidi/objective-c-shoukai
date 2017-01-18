@@ -1,0 +1,39 @@
+コメント
+
+　第17章のサンプルプログラムです。
+
+ファイル
+
+  Info.plist　　　アプリケーションの情報ファイル
+  Localizable-E.strings
+  Localizable-J.strings  ローカライズ用文字列
+  Menu-E.plist
+  Menu-J.plist　　メニューの情報を記述したプロパティリスト
+
+  Ins-Info.plist　インスペクタ（ローダブルバンドル）の情報ファイル
+  Ins-Localizable-E.strings
+  Ins-Localizable-J.strings　インスペクタのローカライズ用文字列
+
+  MyInspector.h
+  MyInspector.m　　インスペクタのクラス
+  MyViewerCtrl.h
+  MyViewerCtrl.m　全体を管理するクラス
+  WinCtrl.h
+  WinCtrl.m　　ウィンドウを管理するクラス
+  main.m
+  makefile
+
+
+コンパイル
+
+  $ make
+
+　作成したアプリケーションやオブジェクトコードを削除するには：
+
+  $ make clean
+
+
+実行
+
+  MyViewer.app というアプリケーションパッケージができるので、
+　Finderからダブルクリックで起動。

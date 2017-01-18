@@ -1,0 +1,39 @@
+{
+    title = "MyViewer";
+    submenu = (
+        { title = "MyViewer"; id = "main";
+          submenu = (
+            { title = "MyViewer を隠す"; key = "h"; selector = "hide:"; },
+            { title = "MyViewer を終了"; key = "q"; selector = "terminate:"; }
+          );
+        },
+        { title = "ファイル"; id = "file";
+          submenu = (
+            { title = "ファイルを開く…"; key = "o";
+              selector = "openFile:"; target = self; },
+            { title = "インスペクタ…"; key = "i";
+              selector = "activateInspector:"; target = self; },
+            { menubar = "true"; },
+            { title = "自動的に縮小"; id = "autoResize";
+              selector = "toggleAutoResize:"; target = self; }
+          );
+        },
+        { title = "編集"; id = "edit";
+          submenu = (
+            { title = "取り消す"; key = "z"; selector = "undo:"; },
+            { title = "やり直す"; key = "Z"; selector = "redo:"; },
+            { menubar = "true"; },
+            { title = "カット"; key = "x"; selector = "cut:"; },
+            { title = "コピー"; key = "c"; selector = "copy:"; },
+            { title = "ペースト"; key = "v"; selector = "paste:"; },
+            { title = "縮小"; key = "-"; selector = "shrink:"; }
+          );
+        },
+        { title = "ウィンドウ"; id = "window";
+          submenu = (
+            { title = "しまう"; key = "m"; selector = "performMiniaturize:"; },
+            { title = "閉じる"; key = "w"; selector = "performClose:"; }
+          );
+        }
+    );
+}

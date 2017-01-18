@@ -1,0 +1,14 @@
+コメント
+
+　本文に掲載のサンプルは dyna.m と type.m です。
+　type.m はコンパイルすると警告が表示されます。
+
+　追加で signature.m と overload.cpp を含みます。
+　signature.m はメソッド名が同じで型の異なるものが存在した場合に生じるトラブルの例を示すものです。また、overload.cpp は C++ のオーバーローディングの例を示すプログラムです。参考までにご覧下さい。
+　次のようにすると dyna.m と type.m がコンパイルされます。
+
+	% make
+
+　次のようにすると、さらに signature.m と overload.cpp もコンパイルされます。
+
+	% make all

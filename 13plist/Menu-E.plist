@@ -1,0 +1,39 @@
+{
+    title = "MyViewer";
+    submenu = (
+        { title = "MyViewer"; id = "main";
+          submenu = (
+            { title = "Hide MyViewer"; key = "h"; selector = "hide:"; },
+            { title = "Quit MyViewer"; key = "q"; selector = "terminate:"; }
+          );
+        },
+        { title = "File"; id = "file";
+          submenu = (
+            { title = "Open File…"; key = "o";
+              selector = "openFile:"; target = self; },
+            { title = "Inspector…"; key = "i";
+              selector = "activateInspector:"; target = self; },
+            { menubar = "true"; },
+            { title = "Auto Resize"; id = "autoResize";
+              selector = "toggleAutoResize:"; target = self; }
+          );
+        },
+        { title = "Edit"; id = "edit";
+          submenu = (
+            { title = "Undo"; key = "z"; selector = "undo:"; },
+            { title = "Redo"; key = "Z"; selector = "redo:"; },
+            { menubar = "true"; },
+            { title = "Cut"; key = "x"; selector = "cut:"; },
+            { title = "Copy"; key = "c"; selector = "copy:"; },
+            { title = "Paste"; key = "v"; selector = "paste:"; },
+            { title = "Shrink"; key = "-"; selector = "shrink:"; }
+          );
+        },
+        { title = "Window"; id = "window";
+          submenu = (
+            { title = "Miniaturize"; key = "m"; selector = "performMiniaturize:"; },
+            { title = "Close"; key = "w"; selector = "performClose:"; }
+          );
+        }
+    );
+}

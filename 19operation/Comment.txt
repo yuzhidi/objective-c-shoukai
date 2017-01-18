@@ -1,0 +1,10 @@
+コメント
+
+opr1.m　　リスト19-1
+
+opr2.m　　リスト19-2
+opr2b.m　　　上記と同じ。addOperationWithBlock: メソッドを使った版。
+opr2c.m　　　上記と同じ。addExecutionBlock: メソッドを使った版。
+
+opr3.m　　リスト19-3
+opr3b.m　　　上記と同じ。addOperations: メソッドを使った版。

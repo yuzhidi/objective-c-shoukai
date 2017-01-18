@@ -1,0 +1,23 @@
+#!/bin/csh
+make all
+echo -n 'Wait: '
+cat /dev/null > tmp
+
+# Run prog1, prog2, ..., prog5
+@ p = 1
+while ( $p <= 5 )
+    # Warming-Up!!
+    ./prog$p
+    echo -n "$p"
+    @ n = 1
+    while ( $n <= 5 )
+      ( time ./prog$p ) |& awk '{ print $1 }' >>  tmp
+      @ n = $n + 1
+      echo -n "."
+    end
+    echo '/' >> tmp
+    @ p = $p + 1
+end
+echo ""
+awk -f list.awk < tmp
+/bin/rm -f tmp

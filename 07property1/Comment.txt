@@ -1,0 +1,36 @@
+コメント
+
+クラス Creature の実装部は同じで、ヘッダが異なっていても動作するという例。
+
+Creature.h
+　　アクセサメソッドの宣言を使ったインタフェース
+
+Creature2.h
+　　宣言プロパティを使ったインタフェース
+
+Creature.m
+Creature2.m
+　　まったく同じ。読み込むヘッダファイルが異なるだけ。
+
+main.m
+main2.m
+　　まったく同じ。読み込むヘッダファイルが異なるだけ。
+
+
+
+
+参考：ファイルの違いを diff コマンドで調べた
+
+$ diff main.m main2.m
+3c3
+< #import "Creature.h"
+---
+> #import "Creature2.h"
+
+
+$ diff Creature.m Creature2.m
+3c3
+< #import "Creature.h"
+---
+> #import "Creature2.h"
+

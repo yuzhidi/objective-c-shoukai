@@ -1,0 +1,25 @@
+"File";
+"Open File...";
+"Inspector...";
+"Auto Resize";
+"Hide %@";
+"Quit %@";
+
+"Filename";
+"Size";
+"Magnification";
+
+"Edit";
+"Undo";
+"Redo";
+"Copy";
+"Shrink";
+
+"Window";
+"Miniaturize";
+"Close";
+
+"File %@ is edited.";
+"Close the window?";
+"OK";
+"Cancel";

@@ -1,0 +1,20 @@
+#!/bin/csh
+echo -n Wait
+cat /dev/null > tmp
+@ p = 1
+foreach prg ( ./speed-mrc ./speed-arc ./speed-gc ./cspeed "java JSpeed" )
+    # Warming-Up!!
+    $prg
+    echo -n ":"
+    @ n = 1
+    while ( $n <= 3 )
+      ( time $prg ) |& awk '{ print $1 }' >>  tmp
+      @ n = $n + 1
+      echo -n "."
+    end
+    echo '/' $prg >> tmp
+    @ p = $p + 1
+end
+echo ""
+awk -f list.awk < tmp
+/bin/rm -f tmp

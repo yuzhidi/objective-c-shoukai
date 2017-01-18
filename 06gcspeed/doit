@@ -1,0 +1,10 @@
+#!/bin/csh
+make clean
+echo '## With Option -O0'
+make -f opt0.mk all
+./doit_sub
+make cleanCs
+echo ''
+echo '## With Option -Os'
+make -f opt2.mk all
+./doit_sub

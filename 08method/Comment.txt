@@ -1,0 +1,25 @@
+コメント
+
+　このディレクトリのファイル doit を実行すると、本文の表8-1と同じ実験を手元のマシンで自動的に行い、結果を表として表示できます。コンパイルも（必要なら）自動的に行われます。
+　サンプルにはさらに、手続き呼び出しをブロックオブジェクトの呼び出しで置き換えたプログラムも prog5 として追加しています。
+　例えばこんな感じです。表の見方は本文の表8-1と同じです。
+　モダンランタイムではメッセージ送信に時間がかかる傾向があります。
+
+$ ./doit
+clang -Wall -std=c99 -O2 -DLOOP=8000 -o prog1 prog1.m -framework Foundation
+clang -Wall -std=c99 -O2 -DLOOP=8000 -o prog2 prog2.m -framework Foundation
+clang -Wall -std=c99 -O2 -DLOOP=8000 -o prog3 prog3.m -framework Foundation
+clang -Wall -std=c99 -O2 -DLOOP=8000 -o prog4 prog4.m -framework Foundation
+clang -Wall -std=c99 -O2 -DLOOP=8000 -o prog5 prog5.m -framework Foundation
+Wait: 1.....2.....3.....4.....5.....
+prog1:  1.126   0.620   2.092
+prog2:  2.642   2.136   7.203
+prog3:  0.802   0.297   1.000
+prog4:  0.505
+prog5:  0.504
+
+
+　ソース metaclass.m は、クラスオブジェクトのスーパークラスとメタクラスを再帰的に表示させるプログラムです。オブジェクトはアドレスで表示されます。実行結果と図8-2を照らし合わせて見て下さい。
+　コンパイルは makefile を使うなら
+	% make meta
+のようにします。

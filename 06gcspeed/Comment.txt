@@ -1,0 +1,32 @@
+コメント
+
+　このディレクトリのファイル doit を実行すると、本文の表6-3と同じ実験を手元のマシンで自動的に行い、結果を表として表示できます。コンパイルも自動的に行われます。
+　例えばこんな感じです。カウンタ管理方式とガーベジコレクション、C言語版、および Javaプログラムの実行速度を計測します。
+
+$ ./doit
+/bin/rm -f *.o a.out speed-gc speed-arc speed-mrc cspeed JSpeed.class
+## With Option -O0
+clang -Wall -O0 -o speed-mrc speed-mrc.m -framework Foundation
+clang -Wall -O0 -fobjc-arc -o speed-arc speed-arc.m -framework Foundation
+clang -Wall -O0 -fobjc-gc-only -o speed-gc speed-gc.m -framework Foundation
+clang -Wall -O0 -o cspeed cspeed.c
+javac JSpeed.java
+Wait:...:...:...:...:...
+./speed-mrc	3.381333
+./speed-arc	4.480667
+./speed-gc	4.246333
+./cspeed	0.376000
+java	3.121333
+/bin/rm -f *.o a.out speed-gc speed-arc speed-mrc cspeed
+
+## With Option -Os
+clang -Wall -Os -o speed-mrc speed-mrc.m -framework Foundation
+clang -Wall -Os -fobjc-arc -o speed-arc speed-arc.m -framework Foundation
+clang -Wall -Os -fobjc-gc-only -o speed-gc speed-gc.m -framework Foundation
+clang -Wall -Os -o cspeed cspeed.c
+Wait:...:...:...:...:...
+./speed-mrc	3.333000
+./speed-arc	2.526667
+./speed-gc	4.176000
+./cspeed	0.342667
+java	3.134333

@@ -1,0 +1,20 @@
+MM = -m64
+CC = clang
+CFLAGS = -Wall $(MM)
+FRAME = -framework Foundation
+OBJ = main.o MuteVolume.o
+
+all: vol64a vol64b
+
+vol64a: $(OBJ)
+	$(CC) $(CFLAGS) -c -o Volume.o Volume.m
+	$(CC) $(MM) -o $@ $(OBJ) Volume.o $(FRAME)
+vol64b: $(OBJ)
+	$(CC) $(CFLAGS) -DFRAGILE -c -o Volume.o Volume.m
+	$(CC) $(MM) -o $@ $(OBJ) Volume.o $(FRAME)
+
+MuteVolume.m: MuteVolume.h
+main.m: MuteVolume.h
+
+clean:
+	/bin/rm -f *.o vol64?

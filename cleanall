@@ -1,0 +1,10 @@
+#!/bin/csh
+foreach f ( * )
+  if ( -d $f ) then
+    cd $f
+    make clean
+    /bin/rm -f .DS_Store .gdb_history */.DS_Store */.gdb_history
+    cd ..
+  endif
+end
+/bin/rm -f .DS_Store .gdb_history */.DS_Store */.gdb_history

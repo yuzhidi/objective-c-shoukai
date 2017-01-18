@@ -1,0 +1,100 @@
+コメント（retain.m）
+
+少々長いプログラムですが、基本的には単純なメソッドが並んでいるだけです。まず、ここで定義されているクラスは Goods という名前で、整数と文字列オブジェクトをインスタンス変数とします。「block〜」という名前のメソッドが５つありますが、これらは少しずつ異なる方法でブロックオブジェクトを生成して、メソッド test: を呼び出します。メソッド test: では、引数として与えられたブロックオブジェクトの複製を作成し、解放します。その過程で、クラス Goods のインスタンス自体と、インスタンス変数である item のリファレンスカウンタがどのように変化するのかを調べます。なお、メソッド retainCount はデバッグやこの例のような調査目的で用いるためのものです。実際のプログラミングでメモリ管理のために利用するのは、むしろ逆効果ですので避けて下さい。このプログラムを実行すると、下のようになります。括弧内の数字は、self と item のリファレンスカウンタの値です。Nothing
+[self, item] = [1, 1], [1, 1], [1, 1]
+Price=500
+[self, item] = [1, 1], [2, 1], [1, 1]
+CopyPrice=501
+[self, item] = [2, 1], [2, 1], [2, 1]
+Item=iPad
+[self, item] = [1, 1], [2, 1], [1, 1]
+String=iPad
+[self, item] = [1, 1], [1, 2], [1, 1]
+Self="iPad (501)"
+[self, item] = [1, 1], [2, 1], [1, 1]
+メソッド blockPrice のブロックオブジェクトはインスタンス変数 price を変更しています。初期値の 499 が 500 になっていますが、blockSelf の出力を見ると、self自体の値が書き換えられていることが分かります。ブロックリテラル内にオブジェクトを記述している場合、それがインスタンス変数かどうかによって動作が異なることも分かります。
+
+
+
+
+#import <Foundation/Foundation.h>
+#import <stdio.h>
+
+@interface Goods : NSObject {
+    int price;
+    NSString *item;
+}
+@property int price;
+@property(retain) NSString *item;
+- (void)test:(void (^)(void))block;
+- (NSString *)description;
+- (void)blockNothing;
+- (void)blockPrice;
+- (void)blockPriceCopy;
+- (void)blockItem;
+- (void)blockItemString;
+- (void)blockSelf;
+@end
+
+@implementation Goods
+@synthesize price, item;
+
+- (void)test:(void (^)(void))block {
+    void (^cp)(void);
+    block();
+    printf("[self, item] = ");
+    printf("[%d, %d], ", (int)[self retainCount], (int)[item retainCount]);
+    cp = [block copy];  // ブロックオブジェクトの複製を作る
+    printf("[%d, %d], ", (int)[self retainCount], (int)[item retainCount]);
+    [cp release];       // 複製のブロックオブジェクトはここで解放
+    printf("[%d, %d]\n", (int)[self retainCount], (int)[item retainCount]);
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ (%d)", item, price];
+};
+
+- (void)blockNothing {  // ブロックリテラル内でオブジェクトを記述しな
+    [self test: ^{ printf("Nothing\n"); } ];
+}
+
+void (^bb)(void);
+
+- (void)blockPrice {    // インスタンス変数の price だけを使う場合
+    [self test: ^{ printf("Price=%d\n", ++price); } ];
+}
+- (void)blockPriceCopy { // いったんコピーを作ってから渡す場合
+    void (^bb)(void) = [^{ printf("CopyPrice=%d\n", ++price); } copy];
+    [self test: bb];
+    [bb release];
+}
+- (void)blockItem {     // インスタンス変数の item だけを使う場合
+    [self test: ^{ printf("Item=%s\n", [item UTF8String]); }];
+}
+- (void)blockItemString {  // 自動変数にいったん代入してから使う場合
+    id str = item;
+    [self test: ^{ printf("String=%s\n", [str UTF8String]); }];
+}
+- (void)blockSelf {
+    [self test:
+        ^{ printf("Self=\"%s\"\n", [[self description] UTF8String]); }];
+}
+@end
+
+int main(void)
+{
+    id pool = [[NSAutoreleasePool alloc] init];
+    Goods *g = [[Goods alloc] init];
+    NSString *s = [[NSString alloc] initWithUTF8String:"iPad"];
+    g.price = 499;
+    g.item = s;
+    [s release];
+    [g blockNothing];
+    [g blockPrice];
+    [g blockPriceCopy];
+    [g blockItem];
+    [g blockItemString];
+    [g blockSelf];
+    [pool release];
+    return 0;
+}

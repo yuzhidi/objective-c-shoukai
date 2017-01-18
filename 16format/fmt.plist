@@ -1,0 +1,10 @@
+{
+    en = {
+        format = "%@ %d file%s";
+        operation = "Move";
+    };
+    ja = {
+        format = "%2$d個のファイルを%1$@します";
+        operation = "移動";
+    };
+}

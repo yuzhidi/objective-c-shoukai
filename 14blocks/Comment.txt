@@ -1,0 +1,21 @@
+コメント
+
+　ブロックオブジェクトの動作を確認するサンプルです。
+
+b_array.m
+
+block1.c　本文 List14-1
+block2.c　本文 List14-2
+block3.c　本文 List14-3
+
+sort_b.c　ブロックオブジェクトを使ってソートする例 本文 List14-4
+sort_f.c　関数ポインタを使ってソートする例
+
+block5.c　本文 List14-5
+block5cp.c ブロックをコピーするようにした版
+block6.c　本文 List14-6
+block6arc.m ARCを使って動作する例
+block7.c  本文 List14-7
+
+retain.m　ブロックオブジェクトのコピーに伴う retain を調べる例（retain_Comment.txtを参照）
+
